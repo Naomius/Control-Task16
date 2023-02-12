@@ -1,6 +1,6 @@
 .result {
     padding-top: 140px;
-    padding-bottom: 91px;
+    padding-bottom: 60px;
     text-align: center;
 }
 
@@ -35,4 +35,28 @@
     line-height: 190px;
     font-family: 'Museo Sans Cyrl Bold', sans-serif;
     color: #FFFFFF;
+}
+
+.result-question {
+    margin-top: 80px;
+    display: flex;
+    justify-content: flex-end;
+    align-self: stretch;
+}
+
+.result-question a {
+    font-size: 17px;
+    line-height: 20px;
+    color: #6933DC;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.result-question a img {
+    margin-left: 13px;
+}
+
+.result-question a:hover {
+    text-decoration: underline;
 }

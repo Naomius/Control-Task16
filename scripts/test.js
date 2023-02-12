@@ -195,18 +195,22 @@
                 name: name,
                 lastName: lastName,
                 email: email,
-                results: this.userResult
+                results: this.userResult,
             }));
 
             if (xhr.status === 200 && xhr.responseText) {
                 let result = null;
+                let answerId = '';
                 try {
                     result = JSON.parse(xhr.responseText);
                 } catch (e) {
                     location.href = 'index.html';
                 }
                 if (result) {
-                    location.href = 'result.html?score=' + result.score + '&total=' + result.total;
+                    this.userResult.forEach(item => {
+                        answerId += item.chosenAnswerId + ','
+                    })
+                    location.href = 'result.html?score=' + result.score + '&total=' + result.total + '&answerId=' + answerId;
                 }
             } else {
                 location.href = 'index.html';
