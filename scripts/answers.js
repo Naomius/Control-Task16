@@ -30,14 +30,18 @@
             }
         },
         startQuizTest() {
-            this.questTitleElem = document.querySelector('#title');
-            this.optionElem = document.querySelector('#options');
+            this.questTitleElem = document.querySelector('.answer-question-title');
+            this.optionElem = document.querySelector('.answer-question-options');
+            console.log(this.optionElem)
 
             console.log(this.quiz)
             this.showQuestions();
         },
         showQuestions() {
             const activeQuestion = this.quiz.questions[this.currentQuestIndex - 1];
+            // activeQuestion.forEach((item, index) => {
+            //     item.questTitleElem.innerHTML =
+            // })
             this.questTitleElem.innerHTML = '<span>Вопрос ' + this.currentQuestIndex
                 + ':</span> ' + activeQuestion.question;
 
@@ -51,6 +55,7 @@
                 inputElement.setAttribute('type', 'radio');
                 inputElement.setAttribute('name', 'answer');
                 inputElement.setAttribute('value', answer.id);
+                inputElement.setAttribute('disabled', 'disabled');
 
                 const labelElement = document.createElement('label');
                 labelElement.setAttribute('for', inputId)
