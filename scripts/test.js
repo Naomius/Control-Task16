@@ -198,6 +198,7 @@
                 results: this.userResult,
             }));
 
+            console.log(id)
             if (xhr.status === 200 && xhr.responseText) {
                 let result = null;
                 let answerId = '';
@@ -210,7 +211,7 @@
                     this.userResult.forEach(item => {
                         answerId += item.chosenAnswerId + ','
                     })
-                    location.href = 'result.html?score=' + result.score + '&total=' + result.total + '&answerId=' + answerId;
+                    location.href = 'result.html?score=' + result.score + '&total=' + result.total + '&id=' + id + '&answerId=' + answerId;
                 }
             } else {
                 location.href = 'index.html';
