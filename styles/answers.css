@@ -117,3 +117,7 @@ input[type="radio"]:checked::before {
 .answer-result a:hover {
     text-decoration: underline;
 }
+
+.answer-question:nth-child(3) {
+    margin-top: 51px;
+}
