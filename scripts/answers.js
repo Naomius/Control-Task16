@@ -45,6 +45,11 @@
                 location.href = 'index.html';
             }
             console.log(this.quizzes)
+
+            const prevPageBtn = document.querySelector('.answerBtn');
+            prevPageBtn.onclick = function () {
+                location.href = 'result.html' + location.search;
+            }
         },
         startQuizTest() {
             document.getElementById('answer-title').innerText = this.quiz.name;
@@ -54,16 +59,9 @@
             console.log(this.quiz)
             this.showQuestions();
 
-          function checkAnswers() {
-           }
         },
         showQuestions() {
-                // if (d) {
-                //
-                // }
-                let count = document.querySelector('.answer-question');
-               console.log(count.id)
-
+            console.log(this.quiz.questions)
             this.quiz.questions.forEach((q, i)=> {
                 const qWrapper = document.querySelector('.answer-wrapper');
                 const questionAnswer = `<div class="answer-question" id="${q.id}">
@@ -71,10 +69,13 @@
                                                <span>Вопрос ${i + 1}:</span> ${q.question}
                                            </div>
                                            <div class="answer-question-options" id="options2">
-                                                ${renderAnswers(q.answers)}
+                                                ${renderAnswers(q.answers, i+1)}
                                            </div>
                                        </div>`
                     qWrapper.innerHTML += questionAnswer;
+
+                let otvetNaVopros = document.querySelector('.answer-question');
+                console.log(otvetNaVopros)
             });
 
             function renderAnswers (answers) {
@@ -88,7 +89,24 @@
 
               return result.join('');
             }
+
         },
+
+        // checkAnswers() {
+        //     this.quiz.questions.forEach((item, index)=> {
+        //         console.log(item.id)
+        //
+        //     })
+            // let count = document.querySelector('.answer-question');
+            // console.log(count.id)
+               // this.init()
+            // for (let i = 0; i < count.id.length; i++) {
+            //     if (this.quizzes[i] === this.stringId) {
+            //         console.log('yes')
+            //     }
+            // }
+            // console.log(stringId)
+        // },
 
     }
     Answers.init();
