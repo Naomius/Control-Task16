@@ -64,6 +64,18 @@ input[type="radio"] {
     place-content: center;
 }
 
+.answer-question-option label.right {
+    cursor: pointer;
+    color: #5FDC33;
+}
+input[type='radio'].right {
+    border: 6px solid #5FDC33;
+}
+input[type='radio'].wrong {
+    border: 6px solid #DC3333;
+}
+
+
 input[type="radio"]::before {
     content: "";
     width: 10px;

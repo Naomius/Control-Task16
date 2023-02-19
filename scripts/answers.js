@@ -22,7 +22,7 @@
                     } catch (e) {
                         location.href = 'index.html';
                     }
-                    this.startQuizTest();
+
                 } else {
                     location.href = 'index.html';
                 }
@@ -38,6 +38,7 @@
             if (xhr.status === 200 && xhr.responseText) {
                 try {
                     this.quizzes = JSON.parse(xhr.responseText);
+                    this.startQuizTest();
                 } catch (e) {
                     location.href = 'index.html';
                 }
@@ -61,7 +62,7 @@
 
         },
         showQuestions() {
-            console.log(this.quiz.questions)
+            // console.log(this.quiz.questions)
             this.quiz.questions.forEach((q, i)=> {
                 const qWrapper = document.querySelector('.answer-wrapper');
                 const questionAnswer = `<div class="answer-question" id="${q.id}">
@@ -69,19 +70,47 @@
                                                <span>Вопрос ${i + 1}:</span> ${q.question}
                                            </div>
                                            <div class="answer-question-options" id="options2">
-                                                ${renderAnswers(q.answers, i+1)}
+                                                ${renderAnswers(q.answers, this.quizzes, i)}
                                            </div>
                                        </div>`
                     qWrapper.innerHTML += questionAnswer;
 
-                let otvetNaVopros = document.querySelector('.answer-question');
-                console.log(otvetNaVopros)
             });
 
-            function renderAnswers (answers) {
-              const result = answers.map(a => {
-                    const answer = `<div class="answer-question-option">
-                                        <input type="radio" id="${a.id}" disabled ='disabled'>
+
+            function renderAnswers (answers, rightAnswers, questionIndex) {
+
+                //Это я просто тут пробовал через отдельное добавление класса =)
+            // const getClassName = (answers, rightAnswers,questionIndex) => {
+            //     let classname = '';
+            //
+            //     if (rightAnswers[questionIndex] !== +userAnswers[questionIndex]) {
+            //         classname = 'wrong';
+            //     } else if (rightAnswers[questionIndex] === +userAnswers[questionIndex]) {
+            //         classname = 'right';
+            //     }
+            //
+            //     return classname;
+            // }
+
+
+                const url = new URL(location.href);
+                const testId = url.searchParams.get('id');
+                const userAnswers = url.searchParams.get('answerId').split(',', 6);
+
+                const result = answers.map((a, i) => {
+                    console.log(a.id)
+                    const radioHTML = rightAnswers[questionIndex] === +userAnswers[questionIndex] &&
+                    a.id === rightAnswers[questionIndex]
+                        ? `<input type="radio" id="${a.id}" class="right" disabled ='disabled'>`
+                        : rightAnswers[questionIndex] !== +userAnswers[questionIndex] &&
+                        a.id === rightAnswers[questionIndex]
+                            ? `<input type="radio" id="${a.id}" class="wrong" disabled ='disabled'>`
+                            : `<input type="radio" id="${a.id}" disabled ='disabled'>`
+
+
+                  const answer = `<div class="answer-question-option right">
+                                        ${radioHTML}
                                         <label>${a.answer}</label>
                                     </div>`;
                     return answer;
@@ -91,22 +120,6 @@
             }
 
         },
-
-        // checkAnswers() {
-        //     this.quiz.questions.forEach((item, index)=> {
-        //         console.log(item.id)
-        //
-        //     })
-            // let count = document.querySelector('.answer-question');
-            // console.log(count.id)
-               // this.init()
-            // for (let i = 0; i < count.id.length; i++) {
-            //     if (this.quizzes[i] === this.stringId) {
-            //         console.log('yes')
-            //     }
-            // }
-            // console.log(stringId)
-        // },
 
     }
     Answers.init();
