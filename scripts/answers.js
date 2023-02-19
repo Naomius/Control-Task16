@@ -109,7 +109,7 @@
                             : `<input type="radio" id="${a.id}" disabled ='disabled'>`
 
 
-                  const answer = `<div class="answer-question-option right">
+                  const answer = `<div class="answer-question-option>
                                         ${radioHTML}
                                         <label>${a.answer}</label>
                                     </div>`;
