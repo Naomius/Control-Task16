@@ -80,36 +80,27 @@
 
             function renderAnswers (answers, rightAnswers, questionIndex) {
 
-                //Это я просто тут пробовал через отдельное добавление класса =)
-            // const getClassName = (answers, rightAnswers,questionIndex) => {
-            //     let classname = '';
-            //
-            //     if (rightAnswers[questionIndex] !== +userAnswers[questionIndex]) {
-            //         classname = 'wrong';
-            //     } else if (rightAnswers[questionIndex] === +userAnswers[questionIndex]) {
-            //         classname = 'right';
-            //     }
-            //
-            //     return classname;
-            // }
+
+            const getRadio = (answersId) => {
+                let className = '';
+                const radioHTML = `<input type="radio" id="${answersId}" disabled ='disabled'`;
+
+                const isRight = rightAnswers[questionIndex] === +userAnswers[questionIndex];
+                    if (+userAnswers[questionIndex] === answersId) {
+                        className = isRight ? 'class="right"' : 'class="wrong"'
+                    }
+
+                return `${radioHTML}${className}>`;
+            }
 
 
                 const url = new URL(location.href);
                 const testId = url.searchParams.get('id');
                 const userAnswers = url.searchParams.get('answerId').split(',', 6);
 
-                const result = answers.map((a, i) => {
-                    console.log(a.id)
-                    const radioHTML = rightAnswers[questionIndex] === +userAnswers[questionIndex] &&
-                    a.id === rightAnswers[questionIndex]
-                        ? `<input type="radio" id="${a.id}" class="right" disabled ='disabled'>`
-                        : rightAnswers[questionIndex] !== +userAnswers[questionIndex] &&
-                        a.id === rightAnswers[questionIndex]
-                            ? `<input type="radio" id="${a.id}" class="wrong" disabled ='disabled'>`
-                            : `<input type="radio" id="${a.id}" disabled ='disabled'>`
-
-
-                  const answer = `<div class="answer-question-option">
+                const result = answers.map((a) => {
+                    const radioHTML = getRadio(a.id)
+                    const answer = `<div class="answer-question-option">
                                         ${radioHTML}
                                         <label>${a.answer}</label>
                                     </div>`;
